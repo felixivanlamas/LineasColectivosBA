@@ -1,1 +1,28 @@
-<p>choferes works!</p>
+<div class="row">
+  <div class="col-md-6">
+    <h1>{{ title }}</h1>
+  </div>
+  <div class="col-md-5"><button mat-raised-button color="primary" (click)="showcrearChofer()">Nuevo Chofer</button></div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <app-choferes-list
+      [listaChoferes]="listaChoferes"
+      (choferSeleccionado)="onChoferSeleccionado = $event"
+      (choferSeleccionado)="showCrearChofer = false"
+    ></app-choferes-list>
+  </div>
+  <div class="col-md-4">
+    <app-choferes-edit
+      *ngIf="onChoferSeleccionado"
+      [choferSeleccionado]="onChoferSeleccionado"
+      (cerrar)="onChoferSeleccionado = undefined"
+    ></app-choferes-edit>
+  </div>
+  <div class="col-md-4" *ngIf="showCrearChofer">
+    <app-choferes-create 
+    (cerrar)="crearChofer($event)"
+    (cerrar)="showCrearChofer = false"
+    ></app-choferes-create>
+  </div>
+</div>

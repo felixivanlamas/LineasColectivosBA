@@ -16,6 +16,17 @@ import { ChoferesComponent } from './components/choferes/choferes.component';
 import { ParadasComponent } from './components/paradas/paradas.component';
 import { RecorridosComponent } from './components/recorridos/recorridos.component';
 import { RegisterComponent } from './components/register/register.component';
+import { LineasEditComponent } from './components/lineas/lineas-list/lineas-edit/lineas-edit.component';
+import { LineasListComponent } from './components/lineas/lineas-list/lineas-list.component';
+import { ColectivosListComponent } from './components/colectivos/colectivos-list/colectivos-list.component';
+import { ColectivosEditComponent } from './components/colectivos/colectivos-list/colectivos-edit/colectivos-edit.component';
+import { ChoferesListComponent } from './components/choferes/choferes-list/choferes-list.component';
+import { ChoferesEditComponent } from './components/choferes/choferes-edit/choferes-edit.component';
+import { ParadasListComponent } from './components/paradas/paradas-list/paradas-list.component';
+import { ParadasEditComponent } from './components/paradas/paradas-list/paradas-edit/paradas-edit.component';
+import { RecorridosListComponent } from './components/recorridos/recorridos-list/recorridos-list.component';
+import { RecorridosEditComponent } from './components/recorridos/recorridos-list/recorridos-edit/recorridos-edit.component';
+import { ChoferesCreateComponent } from './components/choferes/choferes-create/choferes-create.component';
 
 
 @NgModule({
@@ -28,7 +39,18 @@ import { RegisterComponent } from './components/register/register.component';
     ChoferesComponent,
     ParadasComponent,
     RecorridosComponent,
-    RegisterComponent
+    RegisterComponent,
+    LineasEditComponent,
+    LineasListComponent,
+    ColectivosListComponent,
+    ColectivosEditComponent,
+    ChoferesListComponent,
+    ChoferesEditComponent,
+    ParadasListComponent,
+    ParadasEditComponent,
+    RecorridosListComponent,
+    RecorridosEditComponent,
+    ChoferesCreateComponent
   ],
   imports: [
     BrowserModule,
