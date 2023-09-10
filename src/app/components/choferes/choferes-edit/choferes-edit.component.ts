@@ -1,3 +1,4 @@
+import { ChoferesService } from 'src/app/services/choferes.service';
 import {
   Component,
   EventEmitter,
@@ -18,10 +19,14 @@ import { Chofer } from 'src/app/models/chofer.model';
 export class ChoferesEditComponent implements OnChanges {
   form: FormGroup;
 
-  @Input() choferSeleccionado: Chofer | undefined;
+  @Input() choferSeleccionado!: Chofer;
   @Output() cerrar = new EventEmitter<void>(); // Agrega este evento personalizado
 
-  constructor(private fb: FormBuilder, private _snackBar: MatSnackBar) {
+  constructor(
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar,
+    private choferesService: ChoferesService
+  ) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -41,13 +46,21 @@ export class ChoferesEditComponent implements OnChanges {
   }
 
   editar() {
-    // Realiza la edición del chofer aquí
-    this.cerrar.emit()
-    this._snackBar.open('Chofer editado correctamente!', '', {
-      duration: 2000,
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
-    });
+    if (confirm('¿Estás seguro de que deseas editar al chofer?')) {
+      const index = this.choferesService.getChoferes().indexOf(this.choferSeleccionado);
+      if (index !== -1) {
+        let choferEditado = new Chofer(this.form.value.nombre,
+          this.form.value.apellido,
+          this.form.value.documento)
+        this.choferesService.editarChofer(index, choferEditado);
+        this.cerrar.emit();
+        this._snackBar.open('Chofer editado correctamente!', '', {
+          duration: 2000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      }
+    }
   }
 
   cerrarEditor() {
