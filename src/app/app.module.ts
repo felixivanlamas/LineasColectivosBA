@@ -18,13 +18,13 @@ import { RecorridosComponent } from './components/recorridos/recorridos.componen
 import { LineasEditComponent } from './components/lineas/lineas-edit/lineas-edit.component';
 import { LineasListComponent } from './components/lineas/lineas-list/lineas-list.component';
 import { ColectivosListComponent } from './components/colectivos/colectivos-list/colectivos-list.component';
-import { ColectivosEditComponent } from './components/colectivos/colectivos-list/colectivos-edit/colectivos-edit.component';
+import { ColectivosEditComponent } from './components/colectivos/colectivos-edit/colectivos-edit.component';
 import { ChoferesListComponent } from './components/choferes/choferes-list/choferes-list.component';
 import { ChoferesEditComponent } from './components/choferes/choferes-edit/choferes-edit.component';
 import { ParadasListComponent } from './components/paradas/paradas-list/paradas-list.component';
-import { ParadasEditComponent } from './components/paradas/paradas-list/paradas-edit/paradas-edit.component';
+import { ParadasEditComponent } from './components/paradas/paradas-edit/paradas-edit.component';
 import { RecorridosListComponent } from './components/recorridos/recorridos-list/recorridos-list.component';
-import { RecorridosEditComponent } from './components/recorridos/recorridos-list/recorridos-edit/recorridos-edit.component';
+import { RecorridosEditComponent } from './components/recorridos/recorridos-edit/recorridos-edit.component';
 import { ChoferesCreateComponent } from './components/choferes/choferes-create/choferes-create.component';
 import { LineasCreateComponent } from './components/lineas/lineas-create/lineas-create.component';
 
