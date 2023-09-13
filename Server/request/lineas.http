@@ -1,0 +1,22 @@
+@api = http://localhost:3000/api/lineas
+
+GET {{api}}
+###
+
+POST {{api}}
+Content-Type: application/json
+
+{
+  "nombre": "Linea 4"
+}
+
+###
+GET {{api}}/5
+
+###
+
+DELETE {{api}}/5
+
+###
+
+

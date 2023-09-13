@@ -1,0 +1,34 @@
+@api = http://localhost:3000/api/choferes
+
+GET {{api}}
+###
+
+POST {{api}}
+Content-Type: application/json
+
+{
+  "nombre": "Juancito",
+  "apellido": "Facilito"
+}
+
+###
+GET {{api}}/5
+
+###
+
+PUT {{api}}/6
+Content-Type: application/json
+
+{
+    "nombre": "Leo",
+    "apellido": "Cartas",
+    "documento": "22222"
+}
+
+###
+
+DELETE {{api}}/8
+
+###
+
+
