@@ -8,11 +8,11 @@ import { Chofer } from 'src/app/models/chofer.model';
 })
 export class ChoferesComponent {
   public title:string = 'Choferes'
-  public onChoferSeleccionado: any | undefined
+  public onChoferSeleccionado: Chofer
   public showCrearChofer = false
 
   showcrearChofer(){
-    this.onChoferSeleccionado = undefined
+    this.onChoferSeleccionado = null
     this.showCrearChofer = !this.showCrearChofer
   }
 

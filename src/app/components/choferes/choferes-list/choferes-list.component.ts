@@ -1,40 +1,45 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Chofer } from 'src/app/models/chofer.model';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ChoferesService } from 'src/app/services/choferes.service';
+import { Chofer } from 'src/app/models/chofer.model';
 
 @Component({
   selector: 'app-choferes-list',
   templateUrl: './choferes-list.component.html',
-  styleUrls: ['./choferes-list.component.css']
+  styleUrls: ['./choferes-list.component.css'],
 })
 export class ChoferesListComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'apellido', 'documento', 'acciones'];
   viewEdit = false;
   listaChoferes: Chofer[] = [];
-  @Output() choferSeleccionado = new EventEmitter<Chofer>()
+  private cfChangeSub: Subscription;
 
-  constructor(private choferesService:ChoferesService){
-  }
+  @Output() choferSeleccionado = new EventEmitter<Chofer>();
 
-  ngOnInit(){
-    this.listaChoferes = this.choferesService.getChoferes();
-    this.choferesService.choferesChanged.subscribe(
-      (choferes: Chofer[]) => {
-        this.listaChoferes = choferes
-      }
-    );
+  constructor(private choferesService: ChoferesService) {}
+
+  ngOnInit() {
+    this.choferesService.fetchChoferes().subscribe((choferes) => {
+      this.listaChoferes = choferes;
+    });
+    this.choferesService.choferesChanged.subscribe((choferes) => {
+      this.listaChoferes = choferes;
+    });
   }
 
   editChofer(element: Chofer) {
-    this.choferSeleccionado.emit(element)
+    this.choferSeleccionado.emit(element);
   }
 
   deleteChofer(element: Chofer) {
     if (confirm('¿Estás seguro de que deseas eliminar al chofer?')) {
-      const index = this.listaChoferes.indexOf(element); // Encuentra el índice del elemento a eliminar
-      if (index !== -1) {
-        this.choferesService.borrarChofer(index)
-      }
+      this.choferesService.borrarChofer(element.id);
     }
   }
 }

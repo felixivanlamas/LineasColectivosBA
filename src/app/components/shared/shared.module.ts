@@ -3,24 +3,21 @@ import { CommonModule } from '@angular/common';
 
 //Modulos
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms'; 
+
 
 //Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-
-
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -31,13 +28,12 @@ import {MatIconModule} from '@angular/material/icon';
   exports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
     MatTableModule,
     MatIconModule,
-  ]
+  ],
 })
 export class SharedModule {}

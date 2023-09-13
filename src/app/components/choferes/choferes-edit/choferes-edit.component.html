@@ -1,5 +1,5 @@
 <div class="row">
-  <form [formGroup]="form" (ngSubmit)="editar()">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre" type="text" />

@@ -1,2 +1,30 @@
-<h1>Lineas</h1>
-<app-lineas-list></app-lineas-list>
+<div class="row">
+  <div class="col-md-6">
+    <h1>{{ title }}</h1>
+  </div>
+  <div class="col-md-5">
+    <button mat-raised-button color="primary" (click)="showcrearLinea()">
+      Nueva Linea
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-7">
+    <app-lineas-list
+      (lineaSeleccionada)="onLineaSeleccionada = $event"
+      (lineaSeleccionada)="showCrearLinea = false"
+    ></app-lineas-list>
+  </div>
+  <div class="col-md-5">
+    <app-lineas-edit
+      *ngIf="onLineaSeleccionada"
+      [lineaSeleccionada]="onLineaSeleccionada"
+      (cerrar)="onLineaSeleccionada = undefined"
+    ></app-lineas-edit>
+  </div>
+  <div class="col-md-5" *ngIf="showCrearLinea">
+    <app-lineas-create
+      (cerrar)="showCrearLinea = false"
+    ></app-lineas-create>
+  </div>
+</div>

@@ -1,11 +1,10 @@
-import { Colectivo } from "./colectivo.model";
 
 export class Linea{
+    public id: number;
     public nombre: string;
-    public colectivos: Colectivo[];
 
-    constructor(nombre: string, colectivos: Colectivo[]){
+    constructor(id: number, nombre: string){
+        this.id = id
         this.nombre = nombre
-        this.colectivos = colectivos
     }
 }

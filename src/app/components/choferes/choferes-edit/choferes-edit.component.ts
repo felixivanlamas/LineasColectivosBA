@@ -19,8 +19,8 @@ import { Chofer } from 'src/app/models/chofer.model';
 export class ChoferesEditComponent implements OnChanges {
   form: FormGroup;
 
-  @Input() choferSeleccionado!: Chofer;
-  @Output() cerrar = new EventEmitter<void>(); // Agrega este evento personalizado
+  @Input() choferSeleccionado: Chofer;
+  @Output() cerrar = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +36,6 @@ export class ChoferesEditComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['choferSeleccionado'] && this.choferSeleccionado) {
-      // Cargar los datos del chofer en el formulario cuando cambie choferSeleccionado
       this.form.patchValue({
         nombre: this.choferSeleccionado['nombre'],
         apellido: this.choferSeleccionado['apellido'],
@@ -47,20 +46,25 @@ export class ChoferesEditComponent implements OnChanges {
 
   editar() {
     if (confirm('¿Estás seguro de que deseas editar al chofer?')) {
-      const index = this.choferesService.getChoferes().indexOf(this.choferSeleccionado);
-      if (index !== -1) {
-        let choferEditado = new Chofer(this.form.value.nombre,
-          this.form.value.apellido,
-          this.form.value.documento)
-        this.choferesService.editarChofer(index, choferEditado);
-        this.cerrar.emit();
-        this._snackBar.open('Chofer editado correctamente!', '', {
-          duration: 2000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
-        });
-      }
+      let choferEditado = new Chofer(
+        this.choferSeleccionado.id,
+        this.form.value.nombre,
+        this.form.value.apellido,
+        this.form.value.documento
+      );
+      this.choferesService.editarChofer(choferEditado);
+      this.cerrar.emit();
+      this._snackBar.open('Chofer editado correctamente!', '', {
+        duration: 2000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
     }
+  }
+
+  onSubmit() {
+    this.editar()
+    this.cerrarEditor
   }
 
   cerrarEditor() {

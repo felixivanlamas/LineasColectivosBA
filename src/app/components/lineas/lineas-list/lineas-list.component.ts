@@ -1,30 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output, } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Linea } from 'src/app/models/linea.model';
-import { lineas } from '../../../repisitorio';
+import { LineasService } from 'src/app/services/lineas.service';
 
-const ELEMENT_DATA: Linea[] = lineas;
 
 @Component({
   selector: 'app-lineas-list',
   templateUrl: './lineas-list.component.html',
   styleUrls: ['./lineas-list.component.css'],
 })
-export class LineasListComponent {
-  displayedColumns: string[] = ['nombre', 'colectivos', 'acciones'];
-  dataSource = ELEMENT_DATA;
+export class LineasListComponent implements OnInit{
+  displayedColumns: string[] = ['nombre', 'acciones'];
   viewEdit = false;
+  listaLineas: Linea[] = [];
+  private lnChangeSub: Subscription;
 
-  editLinea(element: any) {
-    this.viewEdit = !this.viewEdit;
+  @Output() lineaSeleccionada = new EventEmitter<Linea>();
+
+  constructor(private lineasService: LineasService) {}
+
+  ngOnInit() {
+    this.lineasService.fetchLineas().subscribe((lineas) => {
+      this.listaLineas = lineas;
+    });
+    this.lineasService.lineasChanged.subscribe((lineas) => {
+      this.listaLineas = lineas;
+    });
+  }
+
+
+  editLinea(element: Linea) {
+    this.lineaSeleccionada.emit(element);
+    this.showEditLinea
   }
 
   deleteLinea(element: Linea) {
-    if (confirm('¿Estás seguro de que deseas eliminar la línea?')) {
-      const index = ELEMENT_DATA.indexOf(element); // Encuentra el índice del elemento a eliminar
-      if (index !== -1) {
-        ELEMENT_DATA.splice(index, 1); // Elimina el elemento del arreglo
-        this.dataSource = [...ELEMENT_DATA]; // Actualiza el origen de datos
-      }
+    if (confirm('¿Estás seguro de que deseas eliminar al chofer?')) {
+      this.lineasService.borrarLinea(element.id);
     }
   }
+
+  showEditLinea() {
+    this.viewEdit = !this.viewEdit;
+  }
+
+
 }
