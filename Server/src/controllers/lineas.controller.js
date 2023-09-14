@@ -30,7 +30,7 @@ class LineasController {
     }
 
     // Crear una nueva línea
-    create = async (req, res) => {
+/*     create = async (req, res) => {
         const { nombre } = req.body;
         const pool = await getConnection();
         try {
@@ -42,7 +42,32 @@ class LineasController {
         } catch (error) {
             res.status(500).json({ message: 'Error al crear la línea', error: error.message });
         }
-    }
+    } */
+    create = async (req, res) => {
+        const { nombre } = req.body;
+        const pool = await getConnection();
+      
+        try {
+          // Ejecuta la inserción en la base de datos
+          await pool.request()
+            .input('nombreLinea', nombre)
+            .query('INSERT INTO Lineas (nombre) VALUES (@nombreLinea)');
+      
+          // Consulta la fila recién creada
+          const result = await pool.request()
+            .query('SELECT * FROM Lineas WHERE nombre = @nombreLinea');
+      
+          // Comprueba si se encontró la fila recién creada
+          if (result.recordset.length > 0) {
+            const lineaCreada = result.recordset[0];
+            res.status(201).json({ message: 'Línea creada exitosamente', data: lineaCreada });
+          } else {
+            res.status(500).json({ message: 'Error al crear la línea', error: 'No se pudo encontrar la línea recién creada.' });
+          }
+        } catch (error) {
+          res.status(500).json({ message: 'Error al crear la línea', error: error.message });
+        }
+      }
 
     // Eliminar una línea por su ID
     delete = async (req, res) => {

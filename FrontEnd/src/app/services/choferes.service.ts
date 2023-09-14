@@ -46,9 +46,10 @@ export class ChoferesService {
     .subscribe(
       (responseData) => {
         console.log('Chofer creado exitosamente', responseData);
-        this.fetchChoferes().subscribe((choferes) => {
+        this.choferesChanged.next();
+        /* this.fetchChoferes().subscribe((choferes) => {
           this.choferesChanged.next(choferes);
-        });
+        }); */
       },
       (error) => {
         // Maneja los errores de la solicitud HTTP aquí.
